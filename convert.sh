@@ -7,6 +7,8 @@
 # You can use `mkvinfo "$anime"` to get details of mkv files.
 
 turn=1 # counter, make name of intermidiate files short.
+
+# mkv files in the current directory
 for anime in *.mkv; do
     echo "START $turn $anime"
 
@@ -19,6 +21,20 @@ for anime in *.mkv; do
     rm "$turn"".h265" "$turn"".flac" "$turn"".m4a"
     # Finally, don't forget to delete intermidiate files.
     # If you want to move files to trash, `brew install trash` and then change "rm" to "trash".
+
+    echo "DONE! ""$turn"
+    echo "========================"
+    let turn=$turn+1
+done
+
+# mkv files in folders in current directory
+for anime in **/*.mkv; do
+    echo "START $turn $anime"
+
+    mkvextract tracks "$anime" 0:"$turn"".h265" 1:"$turn"".flac"
+    ffmpeg -i "$turn"".flac" -acodec alac "$turn"".m4a"
+    mp4box -add "$turn"".h265" -add "$turn"".m4a" "${anime%.mkv}"".mp4"
+    rm "$turn"".h265" "$turn"".flac" "$turn"".m4a"
 
     echo "DONE! ""$turn"
     echo "========================"
