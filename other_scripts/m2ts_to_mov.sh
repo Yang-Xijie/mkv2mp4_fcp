@@ -18,7 +18,7 @@ turn=1 # counter
 for anime in **/*.m2ts; do
   echo "=====" "[""$turn""]""START" "$anime" "====="
 
-  ffmpeg -i "$anime" -map 0:0 -map 0:1 -vcodec copy -acodec alac "${anime%.mkv}"".mov"
+  ffmpeg -i "$anime" -map 0:0 -map 0:1 -vcodec copy -acodec alac "${anime%.*}"".mov"
   # `-map 0:0` refers to the video track while `-map 0:1` refers to the audio track
 
   echo "=====" "[""$turn""]""DONE!" "=====\n\n"

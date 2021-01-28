@@ -25,7 +25,7 @@ for anime in **/*.mkv; do
     # (FLAC is not well compatible with FCP)
     ffmpeg -i "$turn"".flac" -vcodec copy -acodec alac "$turn"".m4a"
     # Then use `mp4box` to put hevc and alac together in an mp4 format.
-    mp4box -add "$turn"".h265" -add "$turn"".m4a" "${anime%.mkv}"".mp4"
+    mp4box -add "$turn"".h265" -add "$turn"".m4a" "${anime%.*}"".mp4"
     # Finally, don't forget to delete intermidiate files.
     # If you want to move files to trash, use `brew install trash` and then change `rm` to `trash`.
     rm "$turn"".h265" "$turn"".flac" "$turn"".m4a"
