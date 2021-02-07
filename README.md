@@ -1,3 +1,8 @@
+# ARCHIVE REASON
+This repo uses rather complicated methods to convert media. In fact, all these could be done by `ffmpeg`.
+
+Check new repo at [mkv2mov](https://github.com/Yang-Xijie/mkv2mov)
+
 # README
 This repo provides kinds of shell scrips to help you convert media that may be not well supported on `macOS`.
 
