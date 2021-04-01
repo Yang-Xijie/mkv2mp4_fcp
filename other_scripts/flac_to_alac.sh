@@ -3,7 +3,8 @@
 # - Summary
 #   Convert FLAC(.flac) to ALAC(.m4a)
 # - Discussion
-#   Convert all flac files in and in the subFolder of current path.
+#   Use `brew install ffmpeg` to install `ffmpeg`.
+#   Convert all flac files in and under the current path.
 # - Author
 #   Yang-Xijie
 #   https://github.com/Yang-Xijie

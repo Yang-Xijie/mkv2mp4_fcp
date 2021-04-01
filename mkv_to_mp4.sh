@@ -6,6 +6,7 @@
 # - Discussion
 #   On macOS 11.1 Big Sur, with FCP 10.5
 #   Use `brew install mkvtoolnix ffmpeg mp4box` to install all tools needed.
+#   mp4box is equal to 
 #   Use `mkvinfo <mkv_file>` to get details of mkv files.
 #   Or download MediaInfo.app to check file info.
 # - SeeAlso
