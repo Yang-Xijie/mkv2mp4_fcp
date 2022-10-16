@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # - Summary
 #   Convert FLAC(.flac) to ALAC(.m4a)
@@ -9,15 +9,15 @@
 #   Yang-Xijie
 #   https://github.com/Yang-Xijie
 
-turn=1 # counter
+i=1 # counter
 
-for song in **/*.flac; do
-  echo "=====" "[""$turn""]""START" "$song" "====="
+for song in **/*.flac {
+  echo "===== [$i] START $song ====="
 
   ffmpeg -i "$song" -vcodec copy -acodec alac "${song%.*}.m4a"
 
-  echo "=====" "[""$turn""]""DONE!" "$song" "=====\n\n"
-  let turn=$turn+1
-done
+  echo "===== [$i] DONE! $song =====\n\n"
+  let i=$i+1
+}
 
 echo "ALL DONE!\n"

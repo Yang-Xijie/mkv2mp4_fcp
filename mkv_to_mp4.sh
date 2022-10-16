@@ -1,6 +1,5 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
-#
 # - Summary
 #
 #   Convert anime BDrip (with mkv format, track 0 HEVC, track 1 FLAC)
@@ -23,30 +22,29 @@
 #
 #   Yang-Xijie
 #   https://github.com/Yang-Xijie
-#
 
-turn=1 # counter, make name of intermediate files short.
+i=1 # counter, make name of intermediate files short.
 
-for anime in **/*.mkv; do
-    echo "=====" "[""$turn""]""START" "$anime" "====="
+for anime in **/*.mkv {
+    echo "===== [$i] START $anime ====="
 
     # Firstly, extract tracks from mkv file.
     # Here, 0 and 1 refer to tracks of the mkv file.
-    mkvextract tracks "$anime" 0:"$turn"".h265" 1:"$turn"".flac"
+    mkvextract tracks "$anime" "0:$i.h265" "1:$i.flac"
 
     # Secondly, for the audio, change FLAC (Free Lossless Audio Codec) to ALAC (Apple Lossless Audio Codec).
     # (FLAC is not that compatible with FCP)
-    ffmpeg -i "$turn"".flac" -vcodec copy -acodec alac "$turn"".m4a"
+    ffmpeg -i "$i.flac" -vcodec copy -acodec alac "$i.m4a"
 
     # Then use `mp4box` to put hevc and alac together in an mp4 package.
-    mp4box -add "$turn"".h265" -add "$turn"".m4a" "${anime%.*}"".mp4"
+    mp4box -add "$i.h265" -add "$i.m4a" "${anime%.*}.mp4"
 
-    # Finally, don't forget to delete intermidiate files.
+    # Finally, don't forget to delete intermediate files.
     # If you want to move files to trash, use `brew install trash` and then change `rm` to `trash`.
-    rm "$turn"".h265" "$turn"".flac" "$turn"".m4a"
+    rm "$i.h265" "$i.flac" "$i.m4a"
 
-    echo "=====" "[""$turn""]""DONE!" "=====\n\n"
-    let turn=$turn+1
-done
+    echo "===== [$i] DONE! =====\n\n"
+    let i=$i+1
+}
 
 echo "ALL DONE!\n"
