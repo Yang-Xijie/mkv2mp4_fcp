@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # - Summary
 #   Convert BDMV anime (with m2ts format, track 0 H264/AVC, track 1 PCM)
@@ -13,16 +13,16 @@
 #   Yang-Xijie
 #   https://github.com/Yang-Xijie
 
-turn=1 # counter
+i=1 # counter
 
-for anime in **/*.m2ts; do
-  echo "=====" "[""$turn""]""START" "$anime" "====="
+for anime in **/*.m2ts {
+  echo "===== [$i] START $anime ====="
 
-  ffmpeg -i "$anime" -map 0:0 -map 0:1 -vcodec copy -acodec alac "${anime%.*}"".mov"
+  ffmpeg -i "$anime" -map 0:0 -map 0:1 -vcodec copy -acodec alac "${anime%.*}.mov"
   # `-map 0:0` refers to the video track while `-map 0:1` refers to the audio track
 
-  echo "=====" "[""$turn""]""DONE!" "=====\n\n"
-  let turn=$turn+1
-done
+  echo "===== [$i] DONE! =====\n\n"
+  let i=$i+1
+}
 
 echo "ALL DONE!\n"
