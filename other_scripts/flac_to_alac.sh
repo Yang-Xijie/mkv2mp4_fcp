@@ -11,13 +11,13 @@
 
 i=1 # counter
 
-for song in **/*.flac {
+for song in **/*.flac; do
   echo "===== [$i] START $song ====="
 
   ffmpeg -i "$song" -vcodec copy -acodec alac "${song%.*}.m4a"
 
   echo "===== [$i] DONE! $song =====\n\n"
   let i=$i+1
-}
+done
 
 echo "ALL DONE!\n"

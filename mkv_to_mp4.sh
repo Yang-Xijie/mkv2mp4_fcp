@@ -25,7 +25,7 @@
 
 i=1 # counter, make name of intermediate files short.
 
-for anime in **/*.mkv {
+for anime in **/*.mkv; do
     echo "===== [$i] START $anime ====="
 
     # Firstly, extract tracks from mkv file.
@@ -45,6 +45,6 @@ for anime in **/*.mkv {
 
     echo "===== [$i] DONE! =====\n\n"
     let i=$i+1
-}
+done
 
 echo "ALL DONE!\n"

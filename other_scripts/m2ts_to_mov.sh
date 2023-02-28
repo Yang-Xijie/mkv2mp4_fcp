@@ -15,7 +15,7 @@
 
 i=1 # counter
 
-for anime in **/*.m2ts {
+for anime in **/*.m2ts; do
   echo "===== [$i] START $anime ====="
 
   ffmpeg -i "$anime" -map 0:0 -map 0:1 -vcodec copy -acodec alac "${anime%.*}.mov"
@@ -23,6 +23,6 @@ for anime in **/*.m2ts {
 
   echo "===== [$i] DONE! =====\n\n"
   let i=$i+1
-}
+done
 
 echo "ALL DONE!\n"
